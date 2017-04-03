@@ -1,0 +1,5 @@
+Single Test
+python demo.py --gpus 0 --input data/demo/um_000014.png 
+
+Joint Test
+python predict_joint.py --logdir RUNS/MultiNet_ICCV --data imglist.txt

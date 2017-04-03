@@ -60,6 +60,7 @@ res_folder = 'results'
 def _output_generator(sess, tensor_list, image_pl, data_file,
                       process_image=lambda x: x):
     image_dir = os.path.dirname(data_file)
+    image_dir = os.path.join(image_dir, 'images')
     with open(data_file) as file:
         for datum in file:
             datum = datum.rstrip()
@@ -80,11 +81,15 @@ def eval_runtime(sess, subhypes, image_pl, eval_list, data_file):
     logging.info(' ')
     logging.info('Evaluation complete. Measuring runtime.')
     image_dir = os.path.dirname(data_file)
+    image_dir = os.path.join(image_dir, 'images')
     with open(data_file) as file:
         for datum in file:
             datum = datum.rstrip()
-    image_file = datum.split(" ")[0]
+    #image_file = datum.split(" ")[0]
+    print (image_dir)
+    image_file = datum
     image_file = os.path.join(image_dir, image_file)
+
     image = scp.misc.imread(image_file)
     image = process_image(subhypes, image)
     feed = {image_pl: image}
@@ -305,8 +310,9 @@ def main(_):
                       '--data /path/to/data/txt')
         exit(1)
 
-    output_folder = os.path.join(logdir, res_folder)
-
+    #output_folder = os.path.join(logdir, res_folder)
+    output_folder = os.path.join('DATA/results')
+    
     if not os.path.exists(output_folder):
         os.mkdir(output_folder)
 
@@ -317,6 +323,7 @@ def main(_):
         data_file = os.path.join(os.environ['TV_DIR_DATA'], data_file)
     else:
         data_file = os.path.join('DATA', data_file)
+    
 
     if not os.path.exists(data_file):
         logging.error('Please provide a valid data_file.')
@@ -326,6 +333,8 @@ def main(_):
     if 'TV_DIR_RUNS' in os.environ:
         os.environ['TV_DIR_RUNS'] = os.path.join(os.environ['TV_DIR_RUNS'],
                                                  'UnitedVision2')
+
+    print (output_folder)
     logging_file = os.path.join(output_folder, "analysis.log")
     utils.create_filewrite_handler(logging_file, mode='a')
     load_out = load_united_model(logdir)

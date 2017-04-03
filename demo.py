@@ -309,6 +309,10 @@ def main(_):
     # Loads the model from rundir
     load_out = load_united_model(logdir)
 
+    print (logdir)
+
+    return
+
     # Create list of relevant tensors to evaluate
     meta_hypes, subhypes, submodules, decoded_logits, sess, image_pl = load_out
 
