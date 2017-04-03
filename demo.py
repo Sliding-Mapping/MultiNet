@@ -46,7 +46,6 @@ import time
 
 from PIL import Image, ImageDraw, ImageFont
 
-
 flags = tf.app.flags
 FLAGS = flags.FLAGS
 
