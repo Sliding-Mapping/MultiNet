@@ -1,0 +1,13 @@
+import os
+import cv2
+
+img_root = 'DATA/images'
+fps = 24    
+
+fourcc = cv2.VideoWriter_fourcc(*'MJPG')
+videoWriter = cv2.VideoWriter('kitti.avi',fourcc,fps,(1248,384))#最后一个是保存图片的尺寸
+
+for i in range(99):
+    frame = cv2.imread(img_root+str(i+1)+'.jpg')
+    videoWriter.write(frame)
+videoWriter.release()

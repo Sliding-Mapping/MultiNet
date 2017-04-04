@@ -3,3 +3,9 @@ python demo.py --gpus 0 --input data/demo/um_000014.png
 
 Joint Test
 python predict_joint.py --logdir RUNS/MultiNet_ICCV --data imglist.txt
+
+img to video
+mencoder mf://*.png -o kitti.mp4 -ovc lavc -mf w=384:h=1248:fps=24:type=png
+
+
+rosrun  multinet ros_test.py  --gpus 0 --input data/demo/um_000014.png 
